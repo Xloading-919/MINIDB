@@ -98,19 +98,19 @@ public class VersionManagerImpl extends AbstractCache<Entry> implements VersionM
             if(!Visibility.isVisible(tm, t, entry)) {
                 return false;
             }
-            Lock l = null;
+//            Lock l = null;
             try {
-                l = lt.add(xid, uid);
+                lt.add(xid, uid);
             } catch(Exception e) {
                 t.err = Error.ConcurrentUpdateException;
                 internAbort(xid, true);
                 t.autoAborted = true;
                 throw t.err;
             }
-            if(l != null) {
-                l.lock();
-                l.unlock();
-            }
+//            if(l != null) {
+//                l.lock();
+//                l.unlock();
+//            }
 
             if(entry.getXmax() == xid) {
                 return false;
